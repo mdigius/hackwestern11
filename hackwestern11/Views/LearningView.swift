@@ -27,51 +27,56 @@ struct LearningView: View {
     ]
 
     var body: some View {
-        NavigationView { // Wrap in NavigationView
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    // Large, featured item
-                    LearningItemView(item: learningItems[0], isLarge: true)
-
-                    
-                    // Horizontal scroll view
-                    Text("Explore Topics")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .padding(.horizontal)
-
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack() {
-                            ForEach(learningItems.dropFirst()) { item in
-                                LearningItemView(item: item, isLarge: false)
-                                    .scrollTransition { content, phase in
-                                        content
-                                            .hueRotation(.degrees(45 * phase.value))
-                                            .scaleEffect(phase.isIdentity ? 1 : 0.925)
-                                            .blur(radius: phase.isIdentity ? 0 : 1.5)
-                                    }
+        
+            NavigationView { // Wrap in NavigationView
+                
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        // Large, featured item
+                        LearningItemView(item: learningItems[0], isLarge: true)
+                        
+                        
+                        // Horizontal scroll view
+                        Text("Explore Topics")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .padding(.horizontal)
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack() {
+                                ForEach(learningItems.dropFirst()) { item in
+                                    LearningItemView(item: item, isLarge: false)
+                                        .scrollTransition { content, phase in
+                                            content
+                                                .hueRotation(.degrees(45 * phase.value))
+                                                .scaleEffect(phase.isIdentity ? 1 : 0.925)
+                                                .blur(radius: phase.isIdentity ? 0 : 1.5)
+                                        }
                                     
+                                }
                             }
+                            .padding(.horizontal)
                         }
-                        .padding(.horizontal)
+                        
+                        // Horizontal scroll view
+                        Text("Recent Guides")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .padding(.horizontal)
+                        
+                        ForEach(guides, id: \.self) { guide in
+                            GuideView(guide: guide)
+                        }
+                        
+                        
                     }
-                    
-                    // Horizontal scroll view
-                    Text("Recent Guides")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .padding(.horizontal)
-                    
-                    ForEach(guides, id: \.self) { guide in
-                        GuideView(guide: guide)
-                    }
-                    
-                    
+                    .padding(.vertical)
                 }
-                .padding(.vertical)
-            }
-            .navigationTitle("Learning Hub") // Set navigation title
+                .navigationTitle("Learning Hub") // Set navigation title
+            
+            
         }
+        
     }
 }
 
@@ -95,7 +100,7 @@ struct GuideView: View {
     var body: some View {
         ZStack(){
             RoundedRectangle(cornerRadius: 15)
-                .shadow(color: .black.opacity(0.5), radius: 4)
+                .shadow(color: .black.opacity(0.5), radius: 2)
                 .foregroundStyle(.white)
             
             

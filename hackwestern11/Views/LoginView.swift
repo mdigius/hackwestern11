@@ -31,6 +31,7 @@ struct LoginView: View {
                     .font(.title3)
                 Spacer()
                 Image(systemName: "graduationcap")
+                    .fontWeight(.regular)
                     .font(.system(size: 144, weight: .black))
                     .foregroundStyle(
                         MeshGradient(width: 2, height: 2, points: [
