@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		200CD08E2CFB5888009FD1A3 /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = 200CD08D2CFB5888009FD1A3 /* Auth0 */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		200CC7B62CFB4A82009FD1A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				200CD08E2CFB5888009FD1A3 /* Auth0 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = hackwestern11;
 			packageProductDependencies = (
+				200CD08D2CFB5888009FD1A3 /* Auth0 */,
 			);
 			productName = hackwestern11;
 			productReference = 200CC7A32CFB4A80009FD1A3 /* hackwestern11.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 200CC79A2CFB4A80009FD1A3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				200CD08C2CFB5888009FD1A3 /* XCRemoteSwiftPackageReference "Auth0" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 200CC7A42CFB4A80009FD1A3 /* Products */;
 			projectDirPath = "";
@@ -560,6 +569,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		200CD08C2CFB5888009FD1A3 /* XCRemoteSwiftPackageReference "Auth0" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/Auth0.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		200CD08D2CFB5888009FD1A3 /* Auth0 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 200CD08C2CFB5888009FD1A3 /* XCRemoteSwiftPackageReference "Auth0" */;
+			productName = Auth0;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 200CC79B2CFB4A80009FD1A3 /* Project object */;
 }
