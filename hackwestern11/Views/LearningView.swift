@@ -8,7 +8,10 @@
 import SwiftUI
 import SwiftData
 
+
+
 struct LearningView: View {
+    
     var body: some View {
         ZStack(){
             
