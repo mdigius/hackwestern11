@@ -9,22 +9,21 @@
 import SwiftUI
 
 enum TabModel: String, CaseIterable {
-    case chords = "pianokeys"
-    case progressions = "music.note.list"
-    case settings = "gear"
-    case shop = "storefront.fill"
+    case learning = "list.bullet.clipboard"
+    case planning = "calendar"
+    case wellness = "brain.head.profile"
+    
     
     var title: String {
         switch self {
-        case .chords: "Chords"
-        case .progressions: "Progressions"
-        case .settings: "Settings"
-        case .shop: "Shop"
+        case .learning: "Learning"
+        case .planning: "Planning"
+        case .wellness: "Wellness"
         }
     }
 }
 struct CustomTabBar: View {
-    var activeForeground: Color = .primary
+    var activeForeground: Color = .white
     var activeBackground: Color = .secondary
     @Binding var activeTab: TabModel
     /// For Matched Geometry Effect
