@@ -14,7 +14,8 @@ struct hackwestern11App: App {
         let schema = Schema([
             Item.self,
             Post.self,
-            Comment.self
+            Comment.self,
+            Goal.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
