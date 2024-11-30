@@ -19,7 +19,7 @@ struct ContentView: View {
                     if #available(iOS 18, *) {
                         TabView(selection: $activeTab) {
                             Tab(value: .learning){
-                                LearningView()
+                                LoginView()
                                     .toolbarVisibility(.hidden, for: .tabBar)
                             }
                             Tab(value: .planning){

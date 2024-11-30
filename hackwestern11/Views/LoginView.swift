@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Auth0
+import JWTDecode
 
 struct ProfileView: View {
     let user: User
@@ -41,7 +42,7 @@ extension LoginView {
             .start { result in
                 switch result {
                 case .success(let credentials):
-                    self.user = User(from: credentials.idToken)
+                    print("Obtained credentials: \(credentials)")
                 case .failure(let error):
                     print("Failed with: \(error)")
                 }
