@@ -14,11 +14,13 @@ class LearningItem {
     var title: String
     var itemDescription: String
     var imageName: String
+    var learningText: String
 
-    init(title: String, itemDescription: String, imageName: String) {
+    init(title: String, itemDescription: String, imageName: String, learningText: String) {
         self.id = UUID()
         self.title = title
         self.itemDescription = itemDescription
         self.imageName = imageName
+        self.learningText = learningText
     }
 }

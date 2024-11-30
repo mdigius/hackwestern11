@@ -17,16 +17,25 @@ struct LearningDetailView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity, maxHeight: 200)
                     .padding()
-
-                Text(item.title)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .foregroundStyle(
+                        MeshGradient(width: 2, height: 2, points: [
+                            [0, 0], [1, 0],
+                            [0, 1], [1, 1]
+                        ], colors: [
+                            .indigo, .cyan,
+                            .purple, .pink
+                        ])
+                    )
 
                 Text(item.itemDescription)
+                    .font(.title)
+                    .padding(.vertical)
+                    .fontWeight(.semibold)
+
+                Text(item.learningText)
                     .font(.body)
                     .padding(.vertical)
-
-                Spacer()
+                
             }
             .padding()
         }
