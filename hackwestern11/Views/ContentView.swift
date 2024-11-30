@@ -52,5 +52,9 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+<<<<<<< HEAD
         .modelContainer(for: [Item.self,Goal.self], inMemory: true)
+=======
+        .modelContainer(for: [Item.self, Post.self, Comment.self], inMemory: true)
+>>>>>>> 1a15ce89b87260b2c514c1e30fd1d455e31d36e2
 }

@@ -12,7 +12,10 @@ import SwiftData
 struct hackwestern11App: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,Goal.self
+            Item.self,
+            Post.self,
+            Comment.self,
+            Goal.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
