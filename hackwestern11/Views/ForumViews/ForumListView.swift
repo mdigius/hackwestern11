@@ -26,13 +26,8 @@ struct ForumListView: View {
     @State private var refreshID = UUID()
 
     init() {
-        _posts = Query() // Remove sorting temporarily
-        print("posts fetched: \(posts.count)")
+        _posts = Query(sort: \.dateCreated, order: .reverse)
     }
-
-//    init() {
-//        _posts = Query(sort: \.dateCreated, order: .reverse)
-//    }
 
     var body: some View {
         NavigationView {
