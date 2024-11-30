@@ -29,7 +29,38 @@ struct LoginView: View {
                 Button("Logout", action: self.logout)
             }
         } else {
-            Button("Login", action: self.login)
+            ZStack {
+                VStack(alignment: .center, spacing: 15) {
+                    Text("Welcome to ____!")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .padding(.bottom, 10)
+                        .padding(.top, 50)
+                    Text("Register or login below to continue")
+                        .font(.title3)
+                        
+                    Spacer()
+                    
+                    Button(action: {
+                        login()
+                    }, label: {
+                        Text("Register")
+                            .foregroundStyle(.white)
+                            .fontWeight(.semibold)
+                            .padding(.vertical, 15)
+                            .padding(.horizontal, 50)
+                            .background {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(.blue.gradient)
+                            }
+                            
+                    })
+                    .padding(.bottom)
+                    
+                }
+                .padding(.top, 50)
+            }
+            
         }
     }
 }

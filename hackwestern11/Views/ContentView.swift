@@ -19,7 +19,7 @@ struct ContentView: View {
                     if #available(iOS 18, *) {
                         TabView(selection: $activeTab) {
                             Tab(value: .learning){
-                                LoginView()
+                                LearningView()
                                     .toolbarVisibility(.hidden, for: .tabBar)
                             }
                             Tab(value: .planning){
@@ -36,10 +36,11 @@ struct ContentView: View {
                         
                     }
                 }
-            }
-            VStack(){
                 Spacer()
                 CustomTabBar(activeTab: $activeTab)
+            }
+            VStack(){
+                
             }
         }
         
