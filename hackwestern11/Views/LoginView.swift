@@ -30,6 +30,8 @@ struct LoginView: View {
             }
         } else {
             ZStack {
+                
+                
                 VStack(alignment: .center, spacing: 15) {
                     Text("Welcome to ____!")
                         .font(.title)
@@ -38,6 +40,18 @@ struct LoginView: View {
                         .padding(.top, 50)
                     Text("Register or login below to continue")
                         .font(.title3)
+                    Spacer()
+                    Image(systemName: "questionmark")
+                        .font(.system(size: 144, weight: .black))
+                        .foregroundStyle(
+                            MeshGradient(width: 2, height: 2, points: [
+                                [0, 0], [1, 0],
+                                [0, 1], [1, 1]
+                            ], colors: [
+                                .indigo, .cyan,
+                                .purple, .pink
+                            ])
+                        )
                         
                     Spacer()
                     
