@@ -14,35 +14,56 @@ struct LearningItemView: View {
         ZStack {
             NavigationLink(destination: LearningDetailView(item: item)) {
                 VStack {
+                    Spacer()
                     Image(systemName: item.imageName)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: isLarge ? 150 : 100, height: isLarge ? 150 : 100)
+                        .scaledToFit()
+                        .fontWeight(.light)
+                        .foregroundStyle(
+                            MeshGradient(width: 2, height: 2, points: [
+                                [0, 0], [1, 0],
+                                [0, 1], [1, 1]
+                            ], colors: [
+                                .indigo, .cyan,
+                                .purple, .pink
+                            ])
+                        )
+                        .padding(.top, 10)
                         .padding()
                     
+                    Spacer()
                     Text(item.title)
-                        .font(isLarge ? .title : .headline)
-                        .fontWeight(.bold)
+                        .font(isLarge ? .title : .title2)
+                        .foregroundStyle(.black)
+                        .padding(isLarge ? 0 : 15)
                         .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                        .frame(maxWidth: .infinity)
                         .lineLimit(2)
+                       
+                       
                     
                     if isLarge {
                         Text(item.itemDescription)
                             .font(.subheadline)
+                            .foregroundStyle(.black)
                             .multilineTextAlignment(.center)
-                            .padding(.horizontal)
+                            .padding(.bottom)
+                            .lineLimit(2)
                     }
                 }
                 
                 
             }
         }
-        .frame(maxWidth: isLarge ? .infinity : 120)
+        .frame(maxWidth: isLarge ? .infinity : 240)
+        .frame(minWidth: isLarge ? 240 : 240)
+        .frame(height: isLarge ? 240 : 220)
         .background(Color.white)
-        .cornerRadius(10)
+        .cornerRadius(25)
         .shadow(color: .black.opacity(0.5), radius: 5)
         .padding(isLarge ? 16 : 8)
     }
+}
+
+#Preview {
+    LearningView()
 }
