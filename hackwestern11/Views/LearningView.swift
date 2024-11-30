@@ -48,7 +48,7 @@ struct LearningView: View {
                                         content
                                             .hueRotation(.degrees(45 * phase.value))
                                             .scaleEffect(phase.isIdentity ? 1 : 0.925)
-                                            .blur(radius: phase.isIdentity ? 0 : 2)
+                                            .blur(radius: phase.isIdentity ? 0 : 1.5)
                                     }
                                     
                             }
@@ -68,7 +68,7 @@ struct LearningView: View {
                     
                     
                 }
-                .padding(.top)
+                .padding(.vertical)
             }
             .navigationTitle("Learning Hub") // Set navigation title
         }
