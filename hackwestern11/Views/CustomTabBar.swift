@@ -22,6 +22,7 @@ enum TabModel: String, CaseIterable {
         }
     }
 }
+
 struct CustomTabBar: View {
     var activeForeground: Color = .white
     var activeBackground: Color = .secondary
