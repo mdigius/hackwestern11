@@ -10,9 +10,9 @@ import SwiftData
 
 @main
 struct hackwestern11App: App {
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
             Post.self,
             Comment.self,
             Goal.self
