@@ -22,21 +22,15 @@ struct ContentView: View {
                                 LearningView()
                                     .toolbarVisibility(.hidden, for: .tabBar)
                             }
-                        }
-                        TabView(selection: $activeTab) {
                             Tab(value: .planning){
                                 PlanningView()
                                     .toolbarVisibility(.hidden, for: .tabBar)
                             }
-                        }
-                        TabView(selection: $activeTab) {
                             Tab(value: .wellness){
                                 WellnessView()
                                     .toolbarVisibility(.hidden, for: .tabBar)
                             }
-                            
                         }
-                        
                         
                     } else {
                         
