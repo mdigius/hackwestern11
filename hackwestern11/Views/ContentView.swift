@@ -20,7 +20,7 @@ struct ContentView: View {
 
     
     private var numGoals: Int {
-            attainedGoals.count
+        attainedGoals.count
     }
     
     var body: some View {

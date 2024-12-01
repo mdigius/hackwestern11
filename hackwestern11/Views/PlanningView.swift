@@ -12,15 +12,14 @@ struct PlanningView: View
 {
     @Environment(\.modelContext) private var modelContext
     @Query private var goals: [Goal]
-    @Query private var attainedGoals: [AttainedGoal]
     @State private var editMode = EditMode.inactive
     @State private var textInput: String = ""
     private static var count = 0
     @State private var showSaveSheet = false
-
+    
     var body: some View {
         VStack {
-
+            
             // Title
             Text("Planning")
                 .font(.largeTitle)
@@ -50,59 +49,54 @@ struct PlanningView: View
                                 ])
                             )
                             .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 3)
-                            
+                        
                     }
                 }
                 Spacer()
                 EditButton()
                     .padding()
             }
-
+            
             // List
-            ScrollView()
-            {
-                ForEach(goals)
-                { goal in
-                    GoalView(goal: goal).scrollTransition
-                    { content, phase in content
-                                        .hueRotation(.degrees(45 * phase.value))
-                                        .opacity(phase.isIdentity ? 1 : 0.75)
-                                        .scaleEffect(phase.isIdentity ? 1 : 0.95)
-                                        .blur(radius: phase.isIdentity ? 0 : 0.025)
-                    }
-                    .swipeActions(edge: .trailing)
-                        {
-                        Button(role: .destructive)
-                            {
-                            if let index = goals.firstIndex(where: { $0.id == goal.id })
-                                {
-                                let indexSet = IndexSet(integer: index)
-                                onDelete(offsets: indexSet)
-                                }
-                            }
-                            label: {
-                            Label("Delete", systemImage: "trash")
-                                    }
+            ScrollView(){
+                ForEach(goals){ goal in
+                    GoalView(goal: goal)
+                        .scrollTransition{ content, phase in content
+                                .hueRotation(.degrees(75 * phase.value))
+                                .opacity(phase.isIdentity ? 1 : 0.75)
+                                .scaleEffect(phase.isIdentity ? 1 : 0.95)
+                                .blur(radius: phase.isIdentity ? 0 : 0.025)
                         }
-                    .swipeActions(edge: .leading)
-                    {
-                        Button ()
-                        {
-                            if let index = goals.firstIndex(where: { $0.id == goal.id })
-                            {
-                                let indexSet = IndexSet(integer: index)
-                                onAchieved(achievedOffsets: indexSet)
-                            }
-                            
-                        }
-                    label:
-                        {
-                            Label("CheckMark", systemImage: "checkmark.circle")
-                        }.tint(.green)
-                    }.enableScrollViewSwipeActions()
+//                        .swipeActions(edge: .trailing){
+//                        Button(role: .destructive)
+//                        {
+//                            if let index = goals.firstIndex(where: { $0.id == goal.id })
+//                            {
+//                                let indexSet = IndexSet(integer: index)
+//                                onDelete(offsets: indexSet)
+//                            }
+//                        }
+//                        label: {
+//                            Label("Delete", systemImage: "trash")
+//                        }
+//                    }
+//                    .swipeActions(edge: .leading){
+//                        Button (){
+//                            if let index = goals.firstIndex(where: { $0.id == goal.id })
+//                            {
+//                                let indexSet = IndexSet(integer: index)
+//                                onAchieved(achievedOffsets: indexSet)
+//                            }
+//                            
+//                        }
+//                    label:
+//                        {
+//                            Label("CheckMark", systemImage: "checkmark.circle")
+//                        }.tint(.green)
+//                    }.enableScrollViewSwipeActions()
                 }
             }
-
+            
             Spacer()
         }
         .environment(\.editMode, $editMode)
@@ -113,11 +107,11 @@ struct PlanningView: View
             CreateGoalView(show: $showSaveSheet)
         }
     }
-
+    
     private func onAdd() {
         showSaveSheet.toggle()
     }
-
+    
     private func onDelete(offsets: IndexSet) {
         for index in offsets {
             let goalToDelete = goals[index]
@@ -125,7 +119,7 @@ struct PlanningView: View
         }
         try? modelContext.save()
     }
-
+    
     private func onMove(source: IndexSet, destination: Int) {
         // Add logic for moving items if necessary
     }
@@ -142,5 +136,5 @@ struct PlanningView: View
             print("Error saving context: \(error)") // Debug output for errors
         }
     }
-
+    
 }
