@@ -180,9 +180,9 @@ struct CreateGoalView: View {
                     .foregroundStyle(.gray)
                     .padding(.top, 5)
                 TextField("Ex: $0.53", text: $totalAmountString)
-                    .onChange(of: totalAmountString) { newValue, oldValue in
+                    .onChange(of: totalAmountString) {
                             // Convert string to double
-                            if let value = Double(newValue) {
+                        if let value = Double(totalAmountString) {
                                 totalAmount = value
                             } else {
                                 totalAmount = 0.0 // Handle invalid input
@@ -219,11 +219,19 @@ struct CreateGoalView: View {
                 }
                 Button {
                     goal.title = goalName
-                    if(goal.type == "Avoid") {
+                    goal.type = type
+                    if(type == "Avoid") {
                         goal.cost = cost
+                        goal.image = "exclamationmark.triangle"
                         goal.frequency = frequency
-                    } else if(goal.type == "Saving") {
+                    } else if(type == "Saving") {
+                        totalAmount = Double(totalAmount)
+                        goal.currentAmount = 0
+                        goal.image = "dollarsign.bank.building"
                         goal.totalAmount = totalAmount
+                        print(goal.totalAmount)
+                    } else {
+                        goal.image = "figure.mind.and.body"
                     }
                     modelContext.insert(goal)
                     show = false
