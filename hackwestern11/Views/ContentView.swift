@@ -13,6 +13,12 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var activeTab: TabModel = .planning
     @State private var user = User(id: "nil", email: "nil", picture: "nil")
+    @Query() var attainedGoals: [AttainedGoal]
+    
+    private var numGoals: Int {
+            attainedGoals.count
+    }
+    
     var body: some View {
         ZStack(){
             if user.id != "nil" {
@@ -30,6 +36,10 @@ struct ContentView: View {
                                 }
                                 Tab(value: .wellness){
                                     WellnessView()
+                                        .toolbarVisibility(.hidden, for: .tabBar)
+                                }
+                                Tab(value: .badges){
+                                    BadgesPage(goalsComplete: numGoals)
                                         .toolbarVisibility(.hidden, for: .tabBar)
                                 }
                             }

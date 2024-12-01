@@ -12,6 +12,7 @@ enum TabModel: String, CaseIterable {
     case learning = "list.bullet.clipboard"
     case planning = "calendar"
     case wellness = "brain.head.profile"
+    case badges = "bell"
     
     
     var title: String {
@@ -19,6 +20,7 @@ enum TabModel: String, CaseIterable {
         case .learning: "Learning"
         case .planning: "Planning"
         case .wellness: "Wellness"
+        case .badges: "Bell"
         }
     }
 }
