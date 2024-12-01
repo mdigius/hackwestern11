@@ -1,18 +1,20 @@
 //
-//  LearningDetailView.swift
+//  GuideInfoView.swift
 //  hackwestern11
 //
 //  Created by Jacob on 2024-11-30.
 //
+
 import SwiftUI
 
-struct LearningDetailView: View {
-    let item: LearningItem
-
+struct GuideInfoView: View {
+    let guide: Guide
+    
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Image(systemName: item.imageName)
+            VStack(alignment: .leading, spacing: 20) {
+                // Icon
+                Image(systemName: guide.icon)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity, maxHeight: 200)
@@ -26,20 +28,22 @@ struct LearningDetailView: View {
                             .purple, .pink
                         ])
                     )
-
-                Text(item.itemDescription)
+                
+                // Subtitle
+                Text(guide.subtitle)
                     .font(.title)
                     .padding(.vertical)
                     .fontWeight(.semibold)
-
-                Text(item.learningText)
-                    .font(.body)
-                    .padding(.vertical)
                 
+                // Description
+                Text(guide.guideDescription)
+                    .font(.body)
+                    .multilineTextAlignment(.leading)
+                    .padding(.bottom, 20)
             }
             .padding()
         }
-        .navigationTitle(item.title)
+        .navigationTitle(guide.title)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
