@@ -4,7 +4,7 @@ import JWTDecode
 
 struct ProfileView: View {
     let user: User
-
+    
     var body: some View {
         VStack {
             AsyncImage(url: URL(string: user.picture))
@@ -50,15 +50,25 @@ struct LoginView: View {
                 }, label: {
                     Text("Continue")
                         .foregroundStyle(.white)
-                        .fontWeight(.semibold)
+                        .fontWeight(.bold)
+                        .font(.title2)
                         .padding(.vertical, 15)
                         .padding(.horizontal, 50)
                         .background {
                             RoundedRectangle(cornerRadius: 15)
-                                .fill(.blue.gradient)
+                                .fill(
+                                    MeshGradient(width: 2, height: 2, points: [
+                                        [0, 0], [1, 0],
+                                        [0, 1], [1, 1]
+                                    ], colors: [
+                                        .indigo, .cyan,
+                                        .purple, .pink
+                                    ])
+                                )
                         }
                 })
                 .padding(.bottom)
+                
             }
             .padding(.top, 50)
         }
@@ -74,11 +84,11 @@ extension LoginView {
                 switch result {
                 case .success(let credentials):
                     print("Obtained credentials: \(credentials)")
-
+                    
                     // Directly access idToken since it's non-optional
                     let idToken = credentials.idToken
                     print("idToken found: \(idToken)")
-
+                    
                     // Use the custom initializer to create a User object from the idToken
                     if let tempUser = User(from: idToken) {
                         // Call the onLogin closure to pass user back to ContentView
@@ -87,7 +97,7 @@ extension LoginView {
                     } else {
                         print("Failed to create User from idToken")
                     }
-
+                    
                 case .failure(let error):
                     print("Failed with: \(error)")
                 }
