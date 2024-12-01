@@ -16,6 +16,7 @@ struct PlanningView: View
     @State private var editMode = EditMode.inactive
     @State private var textInput: String = ""
     private static var count = 0
+    @State private var showSaveSheet = false
 
     var body: some View {
         VStack {
@@ -36,8 +37,20 @@ struct PlanningView: View
                 if editMode == .inactive {
                     Button(action: onAdd) {
                         Image(systemName: "plus")
-                            .font(.title)
+                            .resizable()
+                            .frame(width: 25, height: 25)
                             .padding()
+                            .foregroundStyle(
+                                MeshGradient(width: 2, height: 2, points: [
+                                    [0, 0], [1, 0],
+                                    [0, 1], [1, 1]
+                                ], colors: [
+                                    .indigo, .cyan,
+                                    .purple, .pink
+                                ])
+                            )
+                            .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 3)
+                            
                     }
                 }
                 Spacer()
@@ -46,20 +59,18 @@ struct PlanningView: View
             }
 
             // List
-            List {
+            ScrollView(){
                 ForEach(goals) { goal in
-                    TextField("Edit list name", text: Binding(
-                        get: { goal.title },
-                        set: { newValue in
-                            goal.title = newValue
-                            try? modelContext.save()
-                        }
-                    ))
-                    .padding(10)
-                    .background(Color.black)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-                    .swipeActions(edge: .trailing)
+                    
+                    GoalView(goal: goal)
+                        .scrollTransition { content, phase in
+                                        content
+                                            .hueRotation(.degrees(45 * phase.value))
+                                            .opacity(phase.isIdentity ? 1 : 0.75)
+                                            .scaleEffect(phase.isIdentity ? 1 : 0.95)
+                                            .blur(radius: phase.isIdentity ? 0 : 0.025)
+                                    }
+                        .swipeActions(edge: .trailing)
                     {
                         Button(role: .destructive) {
                             if let index = goals.firstIndex(where: { $0.id == goal.id }) {
@@ -79,30 +90,29 @@ struct PlanningView: View
                                 let indexSet = IndexSet(integer: index)
                                 onAchieved(achievedOffsets: indexSet)
                             }
-                                
+                            
                         }
-                        label:
+                    label:
                         {
-                        Label("CheckMark", systemImage: "checkmark.circle")
+                            Label("CheckMark", systemImage: "checkmark.circle")
                         }.tint(.green)
                     }
                 }
-                .onMove(perform: onMove)
-                .listRowBackground(Capsule().fill(Color.black).padding(2)) // Capsule with gray background
-        
             }
-            .environment(\.editMode, $editMode)
-            .scrollContentBackground(.hidden)
 
             Spacer()
+        }
+        .environment(\.editMode, $editMode)
+        .scrollContentBackground(.hidden)
+        .popView(isPresented: $showSaveSheet) {
+            
+        } content: {
+            CreateGoalView(show: $showSaveSheet)
         }
     }
 
     private func onAdd() {
-        let newGoal = Goal(title: "Goal #\(Self.count)")
-        modelContext.insert(newGoal)
-        try? modelContext.save()
-        Self.count += 1
+        showSaveSheet.toggle()
     }
 
     private func onDelete(offsets: IndexSet) {
