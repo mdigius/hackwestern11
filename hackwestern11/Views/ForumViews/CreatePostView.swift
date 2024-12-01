@@ -11,7 +11,7 @@ import SwiftData
 struct CreatePostView: View {
     @Environment(\.modelContext) private var context: ModelContext
     @Environment(\.dismiss) private var dismiss
-
+    
     @State private var title = ""
     @State private var postContent = ""
     
@@ -23,7 +23,7 @@ struct CreatePostView: View {
                 Section(header: Text("Post Title")) {
                     TextField("Enter title", text: $title)
                 }
-
+                
                 Section(header: Text("Post Body")) {
                     TextEditor(text: $postContent)
                         .frame(height: 150)
@@ -46,12 +46,10 @@ struct CreatePostView: View {
             }
         }
     }
-
     private func createPost() {
         let newPost = Post(title: title, body: postContent, isAnonymous: true)
         newPost.dateCreated = Date()
         context.insert(newPost)
         refreshID = UUID()
-        print("Post created: \(newPost.title)")
     }
 }

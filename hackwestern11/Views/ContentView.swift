@@ -101,7 +101,7 @@ struct ContentView: View {
 #Preview {
     ContentView()
 
-        .modelContainer(for: [Post.self, Comment.self, Goal.self, LearningItem.self,AttainedGoal.self], inMemory: true)
+        .modelContainer(for: [Post.self, Comment.self, Goal.self, LearningItem.self, AttainedGoal.self, JournalEntry.self], inMemory: true)
 
 }
 

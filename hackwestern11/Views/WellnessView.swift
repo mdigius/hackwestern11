@@ -33,9 +33,9 @@ struct WellnessView: View {
                     }
                     .padding(.vertical, 12) // Add vertical padding for the entire row
                 }
-
-                // Journaling Functionality (Placeholder)
-                NavigationLink(destination: Text("Journaling Coming Soon")) {
+                
+                // Journaling Functionality
+                NavigationLink(destination: JournalListView()) {
                     HStack(spacing: 16) {
                         Image(systemName: "pencil.circle.fill") // Journaling icon
                             .foregroundStyle(
@@ -55,7 +55,7 @@ struct WellnessView: View {
                     }
                     .padding(.vertical, 12)
                 }
-
+                
                 // Guided Meditation Functionality (Placeholder)
                 NavigationLink(destination: Text("Guided Meditation Coming Soon")) {
                     HStack(spacing: 16) {
