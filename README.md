@@ -5,6 +5,7 @@
 ZenWealth is your ultimate companion for achieving financial security and wellness as a new graduate student. Designed to inspire, educate, and support, ZenWealth combines practical financial tools with community engagement to help you build lasting habits for a secure future.
 
 ---
+![Apple iPhone 11 Pro Max Presentation](https://github.com/user-attachments/assets/224c7a23-406b-4acf-9bf4-4d6094b7ce53)
 
 ## Features
 
