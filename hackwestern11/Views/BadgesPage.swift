@@ -23,7 +23,7 @@ struct BadgesPage: View {
                 ForEach(values, id: \.self) { val in
                     let temp = 0.05 * (8 - Float(val))
                     LinearProgressDemoView(incrementSize: temp, goalsComplete: goalsComplete)
-                        .background(.black)
+                    
                         .foregroundStyle(
                             MeshGradient(width: 2, height: 2, points: [
                                 [0, 0], [1, 0],
@@ -32,6 +32,7 @@ struct BadgesPage: View {
                                 .indigo, .cyan,
                                 .purple, .pink
                             ]))
+                        .padding()
                         .cornerRadius(20)
                 }
             }

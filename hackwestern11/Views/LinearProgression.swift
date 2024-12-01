@@ -32,27 +32,46 @@ struct LinearProgressDemoView: View {
     @State private var isVisible = true
     
     var body: some View {
-        HStack{
-        VStack {
-            let size = Int(100/(incrementSize/0.01))
-            let temp = min(goalsComplete, size)
-            // Progress bar showing the progress
-            ProgressView(value: progress, total: 1.0)
-                .progressViewStyle(LinearProgressViewStyle())
-                .accentColor(progressColor)
-                .padding()
-                Text("\(temp) / \(size) Goals Met")
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-            }
-            Image(systemName: "medal.fill")
-                .resizable()
-                .frame(width: 32.0, height: 32.0)
-            
+        ZStack(){
+            RoundedRectangle(cornerRadius: 25.0)
+                .foregroundStyle(.white)
+            HStack{
+                VStack {
+                    let size = Int(100/(incrementSize/0.01))
+                    let temp = min(goalsComplete, size)
+                    // Progress bar showing the progress
+                    ProgressView(value: progress, total: 1.0)
+                        .progressViewStyle(LinearProgressViewStyle())
+                        .accentColor(progressColor)
+                        .padding()
+                    Text("\(temp) / \(size) Goals Met")
+                        .foregroundColor(.black)
+                        .cornerRadius(8)
+                }
+                Image(systemName: "medal")
+                    .resizable()
+                    .fontWeight(.light)
+                    .frame(width: 40, height: 48)
+                    
+                    .scaledToFill()
+                    .foregroundStyle(
+                        MeshGradient(width: 2, height: 2, points: [
+                            [0, 0], [1, 0],
+                            [0, 1], [1, 1]
+                        ], colors: [
+                            .indigo, .cyan,
+                            .purple, .pink
+                        ]))
                 
+            }
+            .padding()
+            .overlay(
+                    RoundedRectangle(cornerRadius: 10) // Adjust the cornerRadius as needed
+                        .stroke(Color.black, lineWidth: 2)
+                )
+            
         }
-        .padding()
-        .border(.white, width: 2)
+        
         
     }
     

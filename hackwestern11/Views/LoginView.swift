@@ -30,11 +30,6 @@ struct LoginView: View {
                 Text("Register or login below to continue")
                     .font(.title3)
                 Spacer()
-                Image("bigslime")
-                    
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .clipShape(Circle())
                 Image(systemName: "graduationcap")
                     .fontWeight(.regular)
                     .font(.system(size: 144, weight: .black))
