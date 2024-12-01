@@ -1,5 +1,5 @@
 //
-//  Goal.swift
+//  AttainedGoal.swift
 //  hackwestern11
 //
 //  Created by Ali Elgalad on 2024-11-30.
@@ -11,7 +11,7 @@ import SwiftUICore
 
 
 @Model
-final class Goal {
+final class AttainedGoal {
     var title: String
 
     init(title: String = "New Goal") {
