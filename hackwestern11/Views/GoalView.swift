@@ -7,8 +7,8 @@
 import SwiftUI
 import SwiftData
 struct GoalView: View {
-    var goal: Goal
-    
+    @State var goal: Goal
+    @State var showContribute: Bool = false
     init(goal: Goal){
         self.goal = goal
         print(goal.image)
@@ -30,15 +30,30 @@ struct GoalView: View {
                 
                 if(goal.type == "Saving"){
                     Text("$\(String(format: "%.2f", goal.currentAmount)) / $\(String(format: "%.2f", goal.totalAmount))")
-                        .foregroundStyle(.white)
+                        .foregroundStyle(goal.completed ? Color.green : .white)
                         .font(.body)
+                        .fontWeight(.medium)
                         .padding()
+                    if(!goal.completed){
+                        Button(action: {
+                            withAnimation(.smooth(duration: 0.5, extraBounce: 0.25)){
+                                showContribute.toggle()
+                            }
+                        }, label: {
+                            
+                            Image(systemName: "plus.circle")
+                                .foregroundStyle(.white)
+                                .font(.title2)
+                        })
+                        .padding(.trailing)
+                    }
                         
                 } else if (goal.type == "Avoid"){
                     Text("Total Savings: $\(String(format: "%.2f", goal.totalSavings))")
                         .foregroundStyle(.white)
                         .font(.body)
                         .padding()
+                    
                 } else {
                     Button(action: {
                         withAnimation(.smooth(duration: 0.5, extraBounce: 0.25)){
@@ -59,5 +74,11 @@ struct GoalView: View {
         .padding(.horizontal)
         .frame(maxWidth: .infinity)
         .frame(height: 80)
+        .popView(isPresented: $showContribute) {
+            
+        } content: {
+            ContributeSavingView(show: $showContribute, goal: $goal)
+        }
+    
     }
 }
