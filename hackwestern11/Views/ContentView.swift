@@ -69,7 +69,7 @@ struct ContentView: View {
                                         print("Failed with: \(error)")
                                     }
                                 }
-                            }) {
+                        },label: {
                                 AsyncImage(url: URL(string: user.picture)) { image in
                                     image
                                         .resizable()
@@ -81,7 +81,7 @@ struct ContentView: View {
                                         .clipShape(Circle())
                                 }
                                 .padding()
-                            }
+                            })
                             .buttonStyle(PlainButtonStyle()) // Removes any button styling
                     }
                     Spacer()
