@@ -75,7 +75,13 @@ struct CustomTabBar: View {
             }
             .background(alignment: .leading) {
                 Capsule()
-                    .fill(activeBackground/*.gradient*/)
+                    .fill(MeshGradient(width: 2, height: 2, points: [
+                        [0, 0], [1, 0],
+                        [0, 1], [1, 1]
+                    ], colors: [
+                        .indigo, .cyan,
+                        .purple, .pink
+                    ]))
                     .frame(width: tabLocation.width, height: tabLocation.height)
                     .offset(x: tabLocation.minX)
             }

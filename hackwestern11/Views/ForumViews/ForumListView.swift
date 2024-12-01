@@ -1,21 +1,3 @@
-//
-//  ForumListView.swift
-//  hackwestern11
-//
-//  Created by Jacob on 2024-11-30.
-//
-
-//
-//  ForumListView.swift
-//  hackwestern11
-//
-//  Created by Michael Di Giuseppe on 2024-11-30.
-//
-
-//
-//  ForumListView.swift
-//
-
 import SwiftUI
 import SwiftData
 
@@ -24,44 +6,59 @@ struct ForumListView: View {
     @Query var posts: [Post]
     @State private var isPresentingCreatePost = false
     @State private var refreshID = UUID()
-
+    
     init() {
-        _posts = Query() // Remove sorting temporarily
-        print("posts fetched: \(posts.count)")
+        _posts = Query(sort: \.dateCreated, order: .reverse)
     }
-
-//    init() {
-//        _posts = Query(sort: \.dateCreated, order: .reverse)
-//    }
-
+    
     var body: some View {
         NavigationView {
-            VStack {
-                List(posts) { post in
-                    NavigationLink(destination: PostDetailView(post: post)) {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(post.title)
-                                    .font(.headline)
-                                Text(post.isAnonymous ? "Anonymous" : "User")
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
+            ZStack {
+                VStack {
+                    List(posts) { post in
+                        NavigationLink(destination: PostDetailView(post: post)) {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(post.title)
+                                        .font(.headline)
+                                    Text(post.isAnonymous ? "Anonymous" : "User")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                }
+                                Spacer()
+                                Text("\(post.comments.count) comments")
+                                    .font(.footnote)
                             }
-                            Spacer()
-                            Text("\(post.comments.count) comments")
-                                .font(.footnote)
                         }
                     }
+                    .id(refreshID) // Force refresh when refreshID changes
+                    .navigationTitle("Forums")
                 }
-                .id(refreshID) // Force refresh when refreshID changes
-                .navigationTitle("Forums")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
+                
+                // Floating Add Button
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
                         Button(action: {
                             isPresentingCreatePost.toggle()
                         }) {
                             Image(systemName: "plus")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .padding()
+                                .foregroundStyle(
+                                    MeshGradient(width: 2, height: 2, points: [
+                                        [0, 0], [1, 0],
+                                        [0, 1], [1, 1]
+                                    ], colors: [
+                                        .indigo, .cyan,
+                                        .purple, .pink
+                                    ])
+                                )
+                                .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 3)
                         }
+                        .padding()
                         .sheet(isPresented: $isPresentingCreatePost) {
                             CreatePostView(refreshID: $refreshID)
                         }
