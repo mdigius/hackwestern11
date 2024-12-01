@@ -9,6 +9,7 @@ import SwiftData
 struct GoalView: View {
     @State var goal: Goal
     @State var showContribute: Bool = false
+    @State var showAvoid: Bool = false
     init(goal: Goal){
         self.goal = goal
         print(goal.image)
@@ -53,6 +54,17 @@ struct GoalView: View {
                         .foregroundStyle(.white)
                         .font(.body)
                         .padding()
+                    Button(action: {
+                        withAnimation(.smooth(duration: 0.5, extraBounce: 0.25)){
+                            showAvoid.toggle()
+                        }
+                    }, label: {
+                        
+                        Image(systemName: "plus.circle")
+                            .foregroundStyle(.white)
+                            .font(.title2)
+                    })
+                    .padding(.trailing)
                     
                 } else {
                     Button(action: {
@@ -78,6 +90,11 @@ struct GoalView: View {
             
         } content: {
             ContributeSavingView(show: $showContribute, goal: $goal)
+        }
+        .popView(isPresented: $showAvoid) {
+            
+        } content: {
+            AvoidView(show: $showAvoid, goal: $goal)
         }
     
     }

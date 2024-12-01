@@ -127,10 +127,10 @@ struct CreateGoalView: View {
                     .font(.caption)
                     .foregroundStyle(.gray)
                     .padding(.top, 5)
-                TextField("Ex: $564.43", text: $costString)
-                        .onChange(of: costString) { newValue, oldValue in
+                TextField("Ex: $5.00", text: $costString)
+                        .onChange(of: costString) {
                             // Convert string to double
-                            if let value = Double(newValue) {
+                            if let value = Double(costString) {
                                 cost = value
                             } else {
                                 cost = 0.0 // Handle invalid input
@@ -151,7 +151,7 @@ struct CreateGoalView: View {
                     .font(.caption)
                     .foregroundStyle(.gray)
                     .padding(.top, 5)
-                TextField("Ex: No starbucks for a week", text: $goalName)
+                TextField("Ex: No daily starbucks!", text: $goalName)
                     .padding(.vertical, 10)
                     .padding(.horizontal, 15)
                     .background {
@@ -165,7 +165,7 @@ struct CreateGoalView: View {
                     .font(.caption)
                     .foregroundStyle(.gray)
                     .padding(.top, 5)
-                TextField("Ex: Clapped 1996 Civic", text: $goalName)
+                TextField("Ex: New car", text: $goalName)
                     .padding(.vertical, 10)
                     .padding(.horizontal, 15)
                     .background {
@@ -179,7 +179,7 @@ struct CreateGoalView: View {
                     .font(.caption)
                     .foregroundStyle(.gray)
                     .padding(.top, 5)
-                TextField("Ex: $0.53", text: $totalAmountString)
+                TextField("Ex: $1000", text: $totalAmountString)
                     .onChange(of: totalAmountString) {
                             // Convert string to double
                         if let value = Double(totalAmountString) {
