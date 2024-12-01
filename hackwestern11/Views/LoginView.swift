@@ -21,7 +21,7 @@ struct LoginView: View {
     var body: some View {
         ZStack {
             VStack(alignment: .center, spacing: 15) {
-                Text("Welcome to Shitty Finance App!")
+                Text("ZenWealth")
                     .multilineTextAlignment(.center)
                     .font(.title)
                     .fontWeight(.semibold)
