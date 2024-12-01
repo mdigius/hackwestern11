@@ -16,13 +16,18 @@ class JournalEntry {
     var amount: String
     var dateCreated: Date
     var entryText: String
+    var imageString: String
+    /*
+     happy: happyface, neutral: neutralface, sad: sadface, angry: angryface
+     */
     
-    init(title: String, entryType: String, amount: String, entryText: String) {
+    init(title: String, entryType: String, amount: String, entryText: String, imageString: String) {
         self.id = UUID()
         self.title = title
         self.entryType = entryType
         self.amount = amount
         self.dateCreated = Date()
         self.entryText = entryText
+        self.imageString = imageString
     }
 }

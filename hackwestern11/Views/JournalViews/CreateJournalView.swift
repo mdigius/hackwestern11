@@ -14,12 +14,14 @@ struct CreateJournalView: View {
     
     @State private var title = ""
     @State private var entryType = "Purchase Reflection"
+    @State private var emotionType = "Happy"
     @State private var amount: String = ""
     @State private var entryText = ""
     
     @Binding var refreshID: UUID
     
     let entryTypes = ["Purchase Reflection", "Savings Reflection", "Budget Adjustment", "Financial Milestone", "Mental Reflection"]
+    let emotionTypes = ["Happy", "Neutral", "Sad", "Angry"]
     
     var body: some View {
         NavigationView {
@@ -31,6 +33,15 @@ struct CreateJournalView: View {
                 Section(header: Text("Entry Type")) {
                     Picker("Select Type", selection: $entryType) {
                         ForEach(entryTypes, id: \.self) { type in
+                            Text(type)
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                }
+                
+                Section(header: Text("Feeling")) {
+                    Picker("Select Feeling", selection: $emotionType) {
+                        ForEach(emotionTypes, id: \.self) { type in
                             Text(type)
                         }
                     }
@@ -66,7 +77,21 @@ struct CreateJournalView: View {
     }
     
     private func saveEntry() {
-        let newEntry = JournalEntry(title: title, entryType: entryType, amount: amount, entryText: entryText)
+        var imageString: String {
+            switch emotionType {
+            case "Happy":
+                return "happyface"
+            case "Neutral":
+                return "neutralface"
+            case "Sad":
+                return "sadface"
+            case "Angry":
+                return "angryface"
+            default:
+                return "happyface"
+            }
+        }
+        let newEntry = JournalEntry(title: title, entryType: entryType, amount: amount, entryText: entryText, imageString: imageString)
         //newEntry.dateCreated = Date()
         context.insert(newEntry)
         refreshID = UUID()
