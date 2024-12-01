@@ -57,7 +57,7 @@ struct WellnessView: View {
                 }
                 
                 // Guided Meditation Functionality (Placeholder)
-                NavigationLink(destination: Text("Guided Meditation Coming Soon")) {
+                NavigationLink(destination: MeditationView()) {
                     HStack(spacing: 16) {
                         Image(systemName: "leaf.circle.fill") // Meditation icon
                             .foregroundStyle(
