@@ -59,28 +59,31 @@ struct PlanningView: View
             }
 
             // List
-            ScrollView(){
-                ForEach(goals) { goal in
-                    
-                    GoalView(goal: goal)
-                        .scrollTransition { content, phase in
-                                        content
-                                            .hueRotation(.degrees(45 * phase.value))
-                                            .opacity(phase.isIdentity ? 1 : 0.75)
-                                            .scaleEffect(phase.isIdentity ? 1 : 0.95)
-                                            .blur(radius: phase.isIdentity ? 0 : 0.025)
-                                    }
-                        .swipeActions(edge: .trailing)
-                    {
-                        Button(role: .destructive) {
-                            if let index = goals.firstIndex(where: { $0.id == goal.id }) {
+            ScrollView()
+            {
+                ForEach(goals)
+                { goal in
+                    GoalView(goal: goal).scrollTransition
+                    { content, phase in content
+                                        .hueRotation(.degrees(45 * phase.value))
+                                        .opacity(phase.isIdentity ? 1 : 0.75)
+                                        .scaleEffect(phase.isIdentity ? 1 : 0.95)
+                                        .blur(radius: phase.isIdentity ? 0 : 0.025)
+                    }
+                    .swipeActions(edge: .trailing)
+                        {
+                        Button(role: .destructive)
+                            {
+                            if let index = goals.firstIndex(where: { $0.id == goal.id })
+                                {
                                 let indexSet = IndexSet(integer: index)
                                 onDelete(offsets: indexSet)
+                                }
                             }
-                        } label: {
+                            label: {
                             Label("Delete", systemImage: "trash")
+                                    }
                         }
-                    }
                     .swipeActions(edge: .leading)
                     {
                         Button ()
@@ -96,7 +99,7 @@ struct PlanningView: View
                         {
                             Label("CheckMark", systemImage: "checkmark.circle")
                         }.tint(.green)
-                    }
+                    }.enableScrollViewSwipeActions()
                 }
             }
 
