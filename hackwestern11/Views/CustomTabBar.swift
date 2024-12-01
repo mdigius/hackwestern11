@@ -11,8 +11,9 @@ import SwiftUI
 enum TabModel: String, CaseIterable {
     case learning = "list.bullet.clipboard"
     case planning = "calendar"
+    case badges = "medal"
     case wellness = "brain.head.profile"
-    case badges = "bell"
+    
     
     
     var title: String {
@@ -20,7 +21,7 @@ enum TabModel: String, CaseIterable {
         case .learning: "Learning"
         case .planning: "Planning"
         case .wellness: "Wellness"
-        case .badges: "Bell"
+        case .badges: "Badges"
         }
     }
 }
@@ -34,8 +35,6 @@ struct CustomTabBar: View {
     /// View Properties
     @State private var tabLocation: CGRect = .zero
     var body: some View {
-    
-    
         HStack(spacing: 0) {
             HStack(spacing: 0) {
                 ForEach(TabModel.allCases, id: \.rawValue) { tab in
