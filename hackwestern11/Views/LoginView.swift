@@ -26,12 +26,11 @@ struct LoginView: View {
                     .font(.title)
                     .fontWeight(.semibold)
                     .padding(.bottom, 10)
-                    .padding(.top, 50)
                 Text("Register or login below to continue")
                     .font(.title3)
                 Spacer()
-                Image(systemName: "graduationcap")
-                    .fontWeight(.regular)
+                Image(systemName: "dollarsign.ring.dashed")
+                    .fontWeight(.light)
                     .font(.system(size: 144, weight: .black))
                     .foregroundStyle(
                         MeshGradient(width: 2, height: 2, points: [
@@ -70,7 +69,7 @@ struct LoginView: View {
                 .padding(.bottom)
                 
             }
-            .padding(.top, 50)
+            .padding(.top, 25)
         }
     }
 }
