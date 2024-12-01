@@ -19,127 +19,67 @@ struct LearningView: View {
         LearningItem(title: "Paycheck Breakdown", itemDescription: "Understand the components of your paycheck.", imageName: "calendar", learningText: "Your paycheck holds vital information about your financial health. Learn how to read it, from gross income to net pay. Understand deductions, including taxes, Social Security, and benefits like health insurance or retirement contributions. Discover how pre-tax benefits can save you money and why it’s important to regularly review your pay stub for accuracy. A clear understanding of your paycheck ensures you’re maximizing your earnings and managing your finances effectively."),
         LearningItem(title: "Emergency Funds", itemDescription: "Build a safety net for unexpected expenses.", imageName: "checkmark.shield", learningText: "An emergency fund is your financial safety net for life's unexpected events. Learn how to calculate the ideal amount to save—usually three to six months of living expenses. Discover strategies to build your fund gradually, even on a tight budget, by setting small, achievable goals. Understand where to keep your emergency savings, such as in a high-yield savings account, for easy access when needed. Having an emergency fund reduces financial stress and protects you from debt during challenging times."),
         LearningItem(title: "Retirement Planning", itemDescription: "Start planning your financial future today.", imageName: "clock", learningText: "Retirement may seem far away, but starting early is key to building a comfortable future. Learn about employer-sponsored plans like 401(k)s or individual retirement accounts (IRAs), and how contributions grow over time with compound interest. Understand the benefits of matching contributions and tax advantages these accounts offer. Explore strategies for setting realistic savings goals and increasing contributions as your income grows. Planning for retirement now ensures you have the financial freedom to enjoy life later.")
-
+        
     ]
     
-    var guides: [Guide] = [
-        Guide(icon: "clock", title: "Testing1", subtitle: "Testing"),
-        Guide(icon: "pencil", title: "Testing2", subtitle: "Testing"),
-        Guide(icon: "person", title: "Testing3", subtitle: "Testing"),
-        Guide(icon: "brain", title: "Testing4", subtitle: "Testing")
-    ]
-
-    var body: some View {
+    let guides: [Guide] = [
+        Guide(icon: "chart.pie.fill",
+              title: "Saving for Big Goals",
+              subtitle: "Tips to save effectively for major life milestones like buying a car or home.",
+              guideDescription: "Saving for big goals, such as purchasing a car, buying a home, or planning a dream vacation, requires careful planning and discipline. Start by setting clear, measurable goals and calculating how much money you’ll need to save. Create a dedicated savings account for each goal to avoid mixing funds. Automate your savings by setting up regular transfers into these accounts. Reduce unnecessary expenses and direct those funds toward your goals. Take advantage of budgeting tools to track progress and stay motivated. With consistency and focus, you’ll be able to achieve your financial milestones while maintaining your financial stability."),
+        Guide(icon: "lock.fill",
+              title: "Protecting Your Finances",
+              subtitle: "Discover best practices to safeguard your finances and avoid scams.",
+              guideDescription: "In today’s digital world, protecting your finances is more important than ever. Start by securing your online accounts with strong, unique passwords and enabling two-factor authentication whenever possible. Monitor your bank and credit card statements regularly for unauthorized transactions, and promptly report any discrepancies. Be cautious of phishing scams, especially through emails or text messages that ask for personal information. Use secure Wi-Fi connections and avoid accessing financial accounts on public networks. Safeguard sensitive documents by storing them in a safe place or shredding them if no longer needed. Taking these proactive steps will help you secure your financial future."),
+        Guide(icon: "gauge.open.with.lines.needle.67percent.and.arrowtriangle",
+              title: "Understanding Credit Scores",
+              subtitle: "Learn how credit scores work and strategies to improve yours.",
+              guideDescription: "Your credit score plays a crucial role in determining your financial credibility and opportunities. It is calculated based on factors like payment history, credit utilization, length of credit history, types of credit used, and recent credit inquiries. A high credit score can qualify you for lower interest rates on loans and credit cards. To improve your score, always pay bills on time, keep credit card balances below 30% of their limits, and avoid applying for unnecessary credit. Regularly review your credit report for errors and dispute inaccuracies promptly. Understanding and managing your credit score empowers you to make better financial decisions."),
+        Guide(icon: "briefcase",
+              title: "Navigating Job Benefits",
+              subtitle: "Understand health insurance, 401(k)s, and other workplace perks.",
+              guideDescription: "Job benefits are an essential part of your overall compensation package, providing financial security and added value. Start by understanding your health insurance options, including deductibles, premiums, and coverage networks. If your employer offers a 401(k) or similar retirement plan, contribute enough to take full advantage of any matching contributions—it’s essentially free money. Explore other perks like paid time off, stock options, employee discounts, or wellness programs. Ask your HR department if you’re unsure about specific benefits. By fully understanding and utilizing your job benefits, you can maximize your compensation while planning for both short-term needs and long-term financial goals.")
         
-            NavigationView { // Wrap in NavigationView
-                
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
-                        // Large, featured item
-                        LearningItemView(item: learningItems[0], isLarge: true)
-                        
-                        
-                        // Horizontal scroll view
-                        Text("Explore Topics")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .padding(.horizontal)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack() {
-                                ForEach(learningItems.dropFirst()) { item in
-                                    LearningItemView(item: item, isLarge: false)
-                                        .scrollTransition { content, phase in
-                                            content
-                                                .hueRotation(.degrees(45 * phase.value))
-                                                .scaleEffect(phase.isIdentity ? 1 : 0.925)
-                                                .blur(radius: phase.isIdentity ? 0 : 1.5)
-                                        }
-                                    
-                                }
+    ]
+    
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    // Featured Learning Item
+                    LearningItemView(item: learningItems[0], isLarge: true)
+                    
+                    // Explore Topics Section
+                    Text("Explore Topics")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .padding(.horizontal)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(learningItems.dropFirst()) { item in
+                                LearningItemView(item: item, isLarge: false)
                             }
-                            .padding(.horizontal)
                         }
-                        
-                        // Horizontal scroll view
-                        Text("Recent Guides")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .padding(.horizontal)
-                        
-                        ForEach(guides, id: \.self) { guide in
+                        .padding(.horizontal)
+                    }
+                    
+                    // Guides Section
+                    Text("Recent Guides")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .padding(.horizontal)
+                    
+                    ForEach(guides, id: \.title) { guide in
+                        NavigationLink(destination: GuideInfoView(guide: guide)) {
                             GuideView(guide: guide)
                         }
-                        
-                        
+                        .buttonStyle(PlainButtonStyle()) // Ensure no unwanted button style effects
                     }
-                    .padding(.vertical)
                 }
-                .navigationTitle("Learning Hub") // Set navigation title
-            
-            
-        }
-        
-    }
-}
-
-@Model
-class Guide {
-    var icon: String
-    var title: String
-    var subtitle: String
-    
-    init(icon: String, title: String, subtitle: String) {
-        self.icon = icon
-        self.title = title
-        self.subtitle = subtitle
-    }
-    
-    
-}
-struct GuideView: View {
-    var guide: Guide
-    
-    var body: some View {
-        ZStack(){
-            RoundedRectangle(cornerRadius: 15)
-                .shadow(color: .black.opacity(0.5), radius: 2)
-                .foregroundStyle(.white)
-            
-            
-            HStack(){
-                Image(systemName: guide.icon)
-                    .font(.title)
-                    .foregroundStyle(
-                        MeshGradient(width: 2, height: 2, points: [
-                            [0, 0], [1, 0],
-                            [0, 1], [1, 1]
-                        ], colors: [
-                            .indigo, .cyan,
-                            .purple, .pink
-                        ])
-                    )
-                    .padding()
-                VStack(alignment: .leading){
-                    Text(guide.title)
-                        .font(.title3)
-                        .foregroundColor(.black)
-                        .fontWeight(.semibold)
-                    Text(guide.subtitle)
-                        .font(.body)
-                        .foregroundColor(.black)
-                    
-                }
-                
-                Spacer()
-                    
+                .padding(.vertical)
             }
-                
+            .navigationTitle("Learning Hub")
         }
-        
-        
-        .frame(height: 75)
-        .padding(.horizontal)
     }
-    
 }
