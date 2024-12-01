@@ -13,7 +13,11 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var activeTab: TabModel = .planning
     @State private var user = User(id: "nil", email: "nil", picture: "nil")
-    @Query() var attainedGoals: [AttainedGoal]
+    @Query(filter: #Predicate<Goal> { goal in
+        goal.completed == true})
+        var attainedGoals: [Goal]
+
+
     
     private var numGoals: Int {
             attainedGoals.count
@@ -69,7 +73,7 @@ struct ContentView: View {
                                         print("Failed with: \(error)")
                                     }
                                 }
-                        },label: {
+                            }) {
                                 AsyncImage(url: URL(string: user.picture)) { image in
                                     image
                                         .resizable()
@@ -81,7 +85,9 @@ struct ContentView: View {
                                         .clipShape(Circle())
                                 }
                                 .padding()
-                            })
+                            }
+                            .opacity(activeTab == .planning ? 1 : 0)
+                            .disabled(activeTab == .planning ? false : true)
                             .buttonStyle(PlainButtonStyle()) // Removes any button styling
                     }
                     Spacer()
